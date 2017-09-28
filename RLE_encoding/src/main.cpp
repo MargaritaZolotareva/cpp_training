@@ -3,7 +3,7 @@
 using namespace std;
 
 int getFileSize(fstream& streamName);
-string encode(string content);
+string encode(const string& content);
 
 int main()
 {
@@ -50,7 +50,7 @@ int getFileSize(fstream& file)
     return fileSize;
 }
 
-string encode(string content)
+string encode(const string& content)
 {
     char prevSymbol = content[0], nextSymbol;
     int symCount = 1;
