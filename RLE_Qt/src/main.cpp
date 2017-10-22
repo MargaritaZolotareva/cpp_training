@@ -13,8 +13,6 @@
 #include <decoder.h>
 #include <fstream>
 
-using namespace std;
-
 int main(int argc, char* argv[])
 {
     QCoreApplication app(argc, argv);
@@ -52,10 +50,14 @@ int main(int argc, char* argv[])
             decompressFile(inputFile, outputFile);
         }
         else {
-            cerr << "Option --encode or --decode must be specified";
-            exit(1);
+            std::cerr << "Option --encode or --decode must be specified";
+            app.exit(1);
         }
     }
+    else {
+        std::cerr << "Input and output files must be specified";
+        app.exit(1);
+    }
 
-    return app.exec();
+    app.exit(0);
 }
