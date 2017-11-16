@@ -2,8 +2,8 @@
 #include <fstream>
 using namespace std;
 
-int getFileSize(fstream& streamName);
-string encode(const string& content);
+int getFileSize(fstream &streamName);
+string encode(const string &content);
 
 int main()
 {
@@ -41,7 +41,7 @@ int main()
     return 0;
 }
 
-int getFileSize(fstream& file)
+int getFileSize(fstream &file)
 {
     file.seekg(0, ios::end);
     int fileSize = file.tellg();
@@ -50,7 +50,7 @@ int getFileSize(fstream& file)
     return fileSize;
 }
 
-string encode(const string& content)
+string encode(const string &content)
 {
     char prevSymbol = content[0], nextSymbol;
     int symCount = 1;
