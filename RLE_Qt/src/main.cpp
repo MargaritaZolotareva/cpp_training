@@ -1,17 +1,9 @@
 #include <QCoreApplication>
 #include <QCommandLineParser>
-#include <QFile>
 #include <QDebug>
 #include <QTextStream>
-#include <QIODevice>
-#include <iostream>
-#include <ctype.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include <encoder.h>
 #include <decoder.h>
-#include <fstream>
 
 int main(int argc, char* argv[])
 {
@@ -50,12 +42,12 @@ int main(int argc, char* argv[])
             decompressFile(inputFile, outputFile);
         }
         else {
-            std::cerr << "Option --encode or --decode must be specified";
+            qFatal("Option --encode or --decode must be specified");
             app.exit(1);
         }
     }
     else {
-        std::cerr << "Input and output files must be specified";
+        qFatal("Input and output files must be specified");
         app.exit(1);
     }
 

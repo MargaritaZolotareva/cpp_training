@@ -4,7 +4,7 @@
 #include <iostream>
 #include <encoder.h>
 
-void compressFile(const QString& inputFileName, const QString& outputFileName)
+void compressFile(const QString &inputFileName, const QString &outputFileName)
 {
     QString content;
     qint64 decompressedSize, compressedSize;
@@ -33,19 +33,22 @@ void compressFile(const QString& inputFileName, const QString& outputFileName)
 
     compressedSize = encodedContent.length();
     compressionRatio = decompressedSize / (double)compressedSize;
-    std::cout << "Size of decompressed file: " + std::to_string(decompressedSize) + " bytes. \n";
-    std::cout << "Size of compressed file: " + std::to_string(compressedSize) + " bytes. \n";
-    std::cout << "Compression ratio: " + std::to_string(compressionRatio);
+    qDebug() << "Size of decompressed file: " + QString::number(decompressedSize) + " bytes. \n";
+    qDebug() << "Size of compressed file: " + QString::number(compressedSize) + " bytes. \n";
+    qDebug() << "Compression ratio: " + QString::number(compressionRatio);
 
     inFile.close();
     outFile.close();
 }
 
-QString encode(const QString& content)
+QString encode(const QString &content)
 {
+    QString encodedString = "";
+    if(content.length() == 0) {
+        return encodedString;
+    }
     QChar prevSymbol = content[0], nextSymbol;
     qint64 symCount = 1;
-    QString encodedString = "";
     if (content.length() == 1) {
         return QString::number(symCount) + content[0];
     }

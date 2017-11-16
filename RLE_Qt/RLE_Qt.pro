@@ -15,15 +15,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += src/main.cpp \
-    src/encoder.cpp \
-    src/decoder.cpp
+    src/encoder/encoder.cpp \
+    src/decoder/decoder.cpp
 
 DISTFILES += \
     input.txt \
     output.txt
 
 HEADERS += \
-    include/encoder.h \
-    include/decoder.h
+    src/encoder/encoder.h \
+    src/decoder/decoder.h
 
-INCLUDEPATH += $$PWD/include
+INCLUDEPATH += \
+    $$PWD/src/encoder \
+    $$PWD/src/decoder

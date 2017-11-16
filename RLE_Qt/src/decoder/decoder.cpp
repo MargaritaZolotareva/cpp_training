@@ -4,7 +4,7 @@
 #include <iostream>
 #include <decoder.h>
 
-void decompressFile(const QString& inputFileName, const QString& outputFileName)
+void decompressFile(const QString &inputFileName, const QString &outputFileName)
 {
     QString content;
     qint64 decompressedSize, compressedSize;
@@ -33,21 +33,24 @@ void decompressFile(const QString& inputFileName, const QString& outputFileName)
 
     decompressedSize = decodedContent.length();
     compressionRatio = decompressedSize / (double)compressedSize;
-    std::cout << "Size of compressed file: " + std::to_string(compressedSize) + " bytes. \n";
-    std::cout << "Size of decompressed file: " + std::to_string(decompressedSize) + " bytes. \n";
-    std::cout << "Compression ratio: " + std::to_string(compressionRatio);
+    qDebug() << "Size of compressed file: " + QString::number(compressedSize) + " bytes. \n";
+    qDebug() << "Size of decompressed file: " + QString::number(decompressedSize) + " bytes. \n";
+    qDebug() << "Compression ratio: " + QString::number(compressionRatio);
 
     inFile.close();
     outFile.close();
 }
 
-QString decode(const QString& content)
+QString decode(const QString &content)
 {
     QChar symbol;
     qint64 symCount = 1, count = 0;
+    if(content.length() == 0) {
+        return "";
+    }
     QString decodedString = "", symCountStr = content[0];
     if (!symCountStr[0].isDigit()) {
-        std::cerr << "Encoded string must start with number \n";
+        qFatal("Encoded string must start with number \n");
     }
     for (qint32 i = 1; i < content.length(); i++) {
         symbol = content[i];
