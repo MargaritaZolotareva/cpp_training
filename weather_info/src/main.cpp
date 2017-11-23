@@ -109,7 +109,7 @@ int main(int argc, char* argv[])
             int numberOfDays = parser.value(numberOfDaysOption).toInt();
             if (numberOfDays > 5 || numberOfDays < 1) {
                 qDebug("Number of days should be from 1 to 5 inclusively");
-                return 1;
+                app.quit();
             }
             processWeatherData(weatherApiService, city, numberOfDays, settings);
         }
@@ -123,7 +123,7 @@ int main(int argc, char* argv[])
             int numberOfDays = settings.value("numberOfDays").toInt();
             if (numberOfDays > 5 || numberOfDays < 1) {
                 qDebug("Number of days should be from 1 to 5 inclusively");
-                return 1;
+                app.quit();
             }
             processWeatherData(weatherApiService, city, numberOfDays, settings);
         }
@@ -139,13 +139,13 @@ int main(int argc, char* argv[])
             int numberOfDays = parser.value(numberOfDaysOption).toInt();
             if (numberOfDays > 5 || numberOfDays < 1) {
                 qDebug("Number of days should be from 1 to 5 inclusively");
-                return 1;
+                app.quit();
             }
             processWeatherData(weatherApiService, city, numberOfDays, settings);
         }
         else {
             qDebug("City must be specified");
-            return 1;
+            app.quit();
         }
     }
     else if (parser.isSet(currentDayOption)) {
@@ -156,7 +156,7 @@ int main(int argc, char* argv[])
         }
         else {
             qDebug("City must be specified");
-            return 1;
+            app.quit();
         }
     }
     else if (settings.contains("city") && settings.contains("numberOfDays")) {
@@ -164,13 +164,13 @@ int main(int argc, char* argv[])
         int numberOfDays = settings.value("numberOfDays").toInt();
         if (numberOfDays > 5 || numberOfDays < 1) {
             qDebug("Number of days should be from 1 to 5 inclusively");
-            return 1;
+            app.quit();
         }
         processWeatherData(weatherApiService, city, numberOfDays, settings);
     }
     else {
         qDebug("City and number of days must be specified");
-        return 1;
+        app.quit();
     }
 
     app.quit();
