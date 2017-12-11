@@ -11,19 +11,19 @@
 
 const QString compassDirections[] = { "N", "NNE", "NE", "ENE", "E", "ESE", "SE", "SSE", "S", "SSW", "SW", "WSW", "W", "WNW", "NW", "NNW" };
 
-QString degreeToCompass(const double &degree)
+QString degreeToCompass(const double degree)
 {
     int direction = qFloor((degree / 22.5) + 0.5);
     return compassDirections[(direction % 16)];
 }
 
-QJsonArray parseWeatherData(const QJsonObject &weatherData, const int &numberOfDays)
+QJsonArray parseWeatherData(const QJsonObject &weatherData, const int numberOfDays)
 {
     int dayStart = QDate::currentDate().day();
     int dayFinish = dayStart + numberOfDays;
     QJsonArray weatherArray = weatherData.value("list").toArray();
     QJsonArray parsedWeatherData;
-    for (int i = 0; i < weatherArray.count(); i++) {
+    for (int i = 0; i < weatherArray.count(); ++i) {
         QDateTime weatherDate = QDateTime::fromString(weatherArray[i].toObject().value("dt_txt").toString(), "yyyy-MM-dd HH:mm:ss");
         if (weatherDate.date().day() >= dayStart && weatherDate.date().day() < dayFinish) {
             QJsonObject weatherObject;
@@ -49,7 +49,7 @@ void printWeatherData(const QJsonArray &weatherData, const QString &city)
     qDebug() << "\n";
     qDebug() << "Weather for " + city + ":";
 
-    for (int i = 0; i < weatherData.count(); i++) {
+    for (int i = 0; i < weatherData.count(); ++i) {
         QJsonObject currentWeatherData = weatherData[i].toObject();
         qDebug() << "\n";
         qDebug() << currentWeatherData.value("date").toString();
